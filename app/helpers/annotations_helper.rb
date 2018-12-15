@@ -13,11 +13,23 @@ module AnnotationsHelper
 	end
 
 	def annotation_item_price_sum
-       @annotation_price = Annotation.where(Project_Select: "fghgdgjgjfgjgj").where(annotation_creator_id: current_user.id).pluck(:Item_Price).compact.sum.round(4)
+       @annotation_price = Annotation.where(Project_Select: Annotation.find_by_id(params[:id]).Project_Select,annotation_creator_id: current_user.id).pluck(:Item_Price).compact.sum.round(4)
        @annotation_price.present?  ? @annotation_price : 0
 	end
 
-	def annotation_project_description
-		@annotation_project=Annotation.find_by_id(params[:id]).Project_Select.capitalize
+	def annotation_price
+		@annotation_price=Annotation.find_by_id(params[:id]).Item_Price
 	end
+
+	def annotation_affiliate
+      @annotation_price=Annotation.find_by_id(params[:id]).Project_Select.capitalize
+	end
+
+	def annotation_merchant
+	  @annotation_merchant=Annotation.find_by_id(params[:id]).Merchant_Name.capitalize
+	end
+
+	def annotation_source
+      @annotation_source=Annotation.find_by_id(params[:id]).Source.capitalize
+	end 
 end

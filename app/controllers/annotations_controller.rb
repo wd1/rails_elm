@@ -21,8 +21,7 @@ class AnnotationsController < ApplicationController
 	end
 
   def show
-    @annotation = Annotation.where(annotation_creator_id: current_user.id).paginate(:page => params[:page], :per_page => 5).order('created_at DESC')  rescue nil
-    @member = Project.find_by(title: Annotation.find_by_id(params[:id]).Project_Select).members rescue nil
+    @annotation = Annotation.where(Project_Select: Annotation.find_by_id(params[:id]).Project_Select,annotation_creator_id: current_user.id).paginate(:page => params[:page], :per_page => 5).order('created_at DESC')  rescue nil
   end 
 
 	

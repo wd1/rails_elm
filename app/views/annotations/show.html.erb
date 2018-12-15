@@ -8,7 +8,7 @@
                   <i class="icon-file"></i>
                </div>
                <div  class="value small-value">
-                  <h1 class="count"><%= find_annotation_name %></h1>
+                  <span>Annotation Name -: <%= find_annotation_name %></span>
                   <div class="row ">
                      <p>Created by 
                         <a ><%= find_annotation_creator %>
@@ -46,23 +46,18 @@
                <div class="panel-body">
                   <div class="row">
                      <div class="col-md-8">
-                        <h4>Project Description</h4>
-                        <p><%= annotation_project_description %></p>
+                        <h4>Annotation Affiliate -: <%= annotation_affiliate %></h4>
                      </div>
-                     <div class="col-md-4">
-                        <h4>Project Members</h4>
-                        <ul class="list-group">
-                           <div  data-bind="foreach: projects">
-                              <table class=list-group-item >
-                                 <% @member.each do |member|%>
-                                 <tr>
-                                    <td><%= member.first_name.capitalize + ' ' + member.last_name.capitalize %></td>
-                                 </tr>
-                                 <% end if @member.present? %>
-                              </table>
-                           </div>
-                        </ul>
+                     <div class="col-md-8">
+                        <h4>Annotation Price -: <%= annotation_price %></h4>
                      </div>
+                     <div class="col-md-8">
+                        <h4>Annotation Merchant -: <%= annotation_merchant %></h4>
+                     </div>
+                     <div class="col-md-8">
+                        <h4>Annotation Source -: <%= annotation_source %></h4>
+                     </div>
+                    
                   </div>
                </div>
             </section>

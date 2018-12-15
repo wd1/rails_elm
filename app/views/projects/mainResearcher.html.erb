@@ -56,7 +56,7 @@
                                         <th style="width: 25%">Affiliates Name</th>
                                         <th style="width: 25%">Affiliates User</th>
                                         <th style="width: 25%">Affiliates Duration</th>
-                                        <!-- <th style="width: 10%; text-align: center;">Details</th> -->
+                                        <th style="width: 10%; text-align: center;">Details</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -65,7 +65,7 @@
                                         <td><%= project.title.capitalize %></td>
                                         <td><p><%= project&.authors&.last.first_name.capitalize + ' ' + project&.authors&.last.last_name.capitalize if project.authors.present?%></p></td>
                                         <td><%= project.created_at.strftime("%d-%m-%Y") %></td>
-                                        <!-- <td  style="text-align: center;"><a href="/researcher_detail/id*<%= project.id %>" class="btn btn-info btn-xs">&puncsp;<i class="icon-info"></i>&puncsp;</a></td> -->
+                                        <td  style="text-align: center;"><a href="/researcher_detail/id*<%= project.id %>" class="btn btn-info btn-xs">&puncsp;<i class="icon-info"></i>&puncsp;</a></td>
                                     </tr>
                                 <% end if @project.present?%>
                                 </tbody>

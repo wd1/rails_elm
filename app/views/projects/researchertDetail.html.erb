@@ -8,7 +8,7 @@
                   <i class="icon-file"></i>
                </div>
                <div  class="value small-value">
-                  <h1 class="count"><%= find_project_title %></h1>
+               <span>Project Title -:<%= find_project_title %></span>
                   <div class="row ">
                      <p>Created by 
                         <a ><%= find_project_creator %>
@@ -95,7 +95,7 @@
                                  <th  style="width: 20%;  text-align: center;">Amount</th>
                                  <th  style="width: 20%;  text-align: center;">Full Fill</th>
                                  <th  style="width: 20%;  text-align: center;">Date</th>
-                                 <!-- <th  style="width: 20%;  text-align: center;">Details</th> -->
+                                 <th  style="width: 20%;  text-align: center;">Details</th>
 
                               </tr>
                            </thead>
@@ -109,7 +109,7 @@
                                  <td  style="width: 25%; text-align: center;"> <%= annotation.Item_Price %></td>
                                  <td  style="width: 20%; text-align: center;"><%= annotation.date.strftime("%d/%m/%Y") %></td>
                                  <td  style="width: 15%; text-align: center;"><%= annotation.created_at.strftime("%d/%m/%Y") %></td>
-                                 <!-- <td style="text-align: center;"><a href= "/annotations/<%= annotation.id %>"  class="btn btn-info btn-xs">&puncsp;<i class="icon-info"></td> -->
+                                 <td style="text-align: center;"><a href= "/annotations/<%= annotation.id %>"  class="btn btn-info btn-xs">&puncsp;<i class="icon-info"></td>
                               </tr>
                               <% end if @annotation.present? %>
                            </tbody>
