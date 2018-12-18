@@ -52,7 +52,6 @@ module Api
                     item_name = temp_str
 
                 
-
     	              @share.update(investment_principal_dup: investment_principal)
     		           Graph.create!(graph_data: (local_array1.sum/local_array1.count.to_f).round(4),item_name: item_name,item_price: item_price,vendor: item_merchant,user: item_user,invoice: invoice)
     		          elsif @share.present? && x.item_price_dup > investment_principal
@@ -93,9 +92,9 @@ module Api
                     end
                     # space added in array
                     @item_name = temp_str
-              x[-2] = @item_name
-            
+              x[-2] = @item_name           
             end
+            # space added in name
 
 
             @graph = @temp_graph
