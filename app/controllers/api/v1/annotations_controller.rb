@@ -27,6 +27,11 @@ module Api
                     p "Item user is #{item_user}"
                     p "Item note is #{invoice}"
                     p "local array is #{local_array1}"
+
+                    # add space in name
+                    #temp_item_name = item_name
+                    temp_item_name = item_name.split('')
+
     	              @share.update(investment_principal_dup: investment_principal)
     		           Graph.create!(graph_data: (local_array1.sum/local_array1.count.to_f).round(4),item_name: item_name,item_price: item_price,vendor: item_merchant,user: item_user,invoice: invoice)
     		          elsif @share.present? && x.item_price_dup > investment_principal
