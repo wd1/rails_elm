@@ -31,13 +31,11 @@ module Api
                     p "local array is #{local_array1}"
 
                     # add space in name
-                    #temp_item_name = item_name
                     temp_item_name = item_name.split('')
                     i=0
                     temp_str = ''
                     temp_item_name.each do |ch|
                       if (temp_item_name[i] == temp_item_name[i].downcase && temp_item_name[i+1]==temp_item_name[i+1].upcase)
-                          #chars.insert(i+1,'@')
                           temp_str += ' '
                       end
                       temp_str += ch
