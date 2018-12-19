@@ -8,18 +8,18 @@ module Api
         fulfilled_avg =[]
         @annotation = Annotation.where.not(item_price_dup: 0)
           if @annotation.present? 
-    	      @annotation.each do |x|
-    	        if x.date.to_date == Date.today
+            @annotation.each do |x|
+              if x.date.to_date == Date.today
                 p "--------------1----------------"
-    	          @share = Share.find_by("investment_principal_dup > ?", 0)
-    	          investment_principal = @share.try(:investment_principal_dup)
-    	            if @share.present? &&  @share.investment_principal_dup >= x.item_price_dup 
+                @share = Share.find_by("investment_principal_dup > ?", 0)
+                investment_principal = @share.try(:investment_principal_dup)
+                  if @share.present? &&  @share.investment_principal_dup >= x.item_price_dup 
                     p "----------------2-----------------"
-    	              investment_principal = investment_principal - x.item_price_dup
-    		            x.update(item_price_dup: 0)
-    		            local_array1 << x.Item_Price
+                    investment_principal = investment_principal - x.item_price_dup
+                    x.update(item_price_dup: 0)
+                    local_array1 << x.Item_Price
                     item_price = x.Item_Price
-    		            item_name = x.Item_Name
+                    item_name = x.Item_Name
                     item_merchant = x.Merchant_Name
                     item_user = User.find_by_id(x.annotation_creator_id).first_name + User.find_by_id(x.annotation_creator_id).last_name
                     invoice = x.Note 
@@ -32,6 +32,7 @@ module Api
 
                     # add space in name
                     temp_item_name = item_name.split('')
+                    binding.pry
                     i=0
                     temp_str = ''
                     temp_item_name.each do |ch|
@@ -48,18 +49,17 @@ module Api
                     end
                     # space added in array
                     item_name = temp_str
-
-                
-    	              @share.update(investment_principal_dup: investment_principal)
-    		           Graph.create!(graph_data: (local_array1.sum/local_array1.count.to_f).round(4),item_name: item_name,item_price: item_price,vendor: item_merchant,user: item_user,invoice: invoice)
-    		          elsif @share.present? && x.item_price_dup > investment_principal
-    		            p "--------------3-------------"
+                    binding.pry
+                    @share.update(investment_principal_dup: investment_principal)
+                   Graph.create!(graph_data: (local_array1.sum/local_array1.count.to_f).round(4),item_name: item_name,item_price: item_price,vendor: item_merchant,user: item_user,invoice: invoice)
+                  elsif @share.present? && x.item_price_dup > investment_principal
+                    p "--------------3-------------"
                     val = x.item_price_dup - investment_principal
-    		            x.update(item_price_dup: val)
-    	              @share.update(investment_principal_dup: 0)
-    		          end
-    		      end
-    	      end
+                    x.update(item_price_dup: val)
+                    @share.update(investment_principal_dup: 0)
+                  end
+              end
+            end
           end
           p "------------4----------------"
           #binding.pry
