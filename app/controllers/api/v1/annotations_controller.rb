@@ -115,7 +115,9 @@ module Api
                local_array2[:cat1] = arr3
                local_array2[:cat2] = arr4
                local_array2[:invoice] = arr5
+               # 50.times{|x|
                fulfilled_avg << local_array2
+               # }
             end
            p "Fullfilled avg is===> #{fulfilled_avg}"
            render json: {fulfilled_avg: fulfilled_avg}

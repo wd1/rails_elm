@@ -211,15 +211,18 @@
            type: "GET",
            dataType: 'json',
            success: function(result){
+            // alert(result.fulfilled_avg);
                var annot = result.fulfilled_avg;
+            // console.log(result);
                unfulfilled_requests = annot;
+               // console.log("dgfdgbudf");
+               // console.log(unfulfilled_requests);
                drawChart(unfulfilled_requests);
               
            }});
           
            //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
            function drawChart(data){
-   
                    // create the chart
                     var index = 0;
                    //var x = (new Date()).getTime();
@@ -233,37 +236,44 @@
                               // },
 
                                chart: {
-                               marginTop: 50
-                            //    events: {
-                            //     load: function() {
+                               marginTop: 50,
+                               events: {
+                                load: function() {
+                                    // set up the updating of the chart each second
+                                    var series = this.series[0];
+                                    // while (index < unfulfilled_requests.length) {
+                                    setInterval(function() {
 
-                            //         // set up the updating of the chart each second
-                            //         var series = this.series[0];
-                            //         // while (index < unfulfilled_requests.length) {
-                            //         setInterval(function() {
+                                        //var x = (new Date()).getTime();
+                                        if(index > unfulfilled_requests.length){
+                                            index = 0;
+                                            return;
+                                        }
+                                         if ((unfulfilled_requests[index]["x"] != undefined && unfulfilled_requests[index]["open"] != undefined && unfulfilled_requests[index]["high"] != undefined && unfulfilled_requests[index]["low"] != undefined && unfulfilled_requests[index]["cat1"] != undefined &&
+                                           unfulfilled_requests[index]["cat2"] != undefined &&
+                                           unfulfilled_requests[index]["price"] != undefined &&
+                                           unfulfilled_requests[index]["name"] != undefined
+                                          )){
+                                      // alert(unfulfilled_requests[index]["x"]);
+                                        series.addPoint([
+                                        unfulfilled_requests[index]["x"]*1,
+                                        unfulfilled_requests[index]["open"]*1,
+                                        unfulfilled_requests[index]["high"]*1,
+                                        unfulfilled_requests[index]["low"]*1,
+                                        unfulfilled_requests[index]["close"]*1,
+                                        unfulfilled_requests[index]["cat1"],
+                                        unfulfilled_requests[index]["cat2"],
+                                        unfulfilled_requests[index]["price"],
+                                        unfulfilled_requests[index]["name"]
+                                        ], true, true);
 
-                            //             //var x = (new Date()).getTime();
-                            //             if(index > unfulfilled_requests.length){
-                            //                 index = 0;
-                            //                 return;
-                            //             }
-                            //             series.addPoint([
-                            //             unfulfilled_requests[index]["x"]*1,
-                            //             unfulfilled_requests[index]["open"]*1,
-                            //             unfulfilled_requests[index]["high"]*1,
-                            //             unfulfilled_requests[index]["low"]*1,
-                            //             unfulfilled_requests[index]["close"]*1,
-                            //             unfulfilled_requests[index]["cat1"],
-                            //             unfulfilled_requests[index]["cat2"],
-                            //             unfulfilled_requests[index]["price"],
-                            //             unfulfilled_requests[index]["name"]
-                            //             ], true, true);
-                            //             index ++;
-                            //             //temp = unfulfilled_requests[index]["close"]*1;
-                            //         }, 1000);
+                                     }
+                                        index ++;
+                                        //temp = unfulfilled_requests[index]["close"]*1;
+                                    }, 1000);
                                   
-                            //     }
-                            // }
+                                }
+                            }
                            },
 
                         rangeSelector: {
@@ -332,8 +342,6 @@
                                            });
                                    }
                            });
-                          
-
                            
    
                // Investment Principal Data
