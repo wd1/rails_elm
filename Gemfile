@@ -65,7 +65,6 @@ group :production do
 end
 
 gem 'active_model_serializers', '0.8.3'
-gem 'httparty'
 
 gem 'rack-cors'
 gem 'pry'
