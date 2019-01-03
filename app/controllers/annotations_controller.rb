@@ -1,7 +1,10 @@
 class AnnotationsController < ApplicationController
+
+  before_action :load_project, only: [:create]
 	
-	def create
-	  @annotation = Annotation.new(annotation_params)
+  def create
+    project = Project.find_by(id: params[:Project_Select])
+	  @annotation = Annotation.new(annotation_params.merge!({Project_Select: project.title}))
       if params["date_status"] == "order"
         @annotation.date_status = params["date_status"]
         @annotation.date = params["date"]
@@ -13,7 +16,7 @@ class AnnotationsController < ApplicationController
        @annotation.annotation_creator_id = current_user.id
       if @annotation.save!
         flash[:success] = "Request Submit Successfully"
-        redirect_to annotation_path(@annotation)
+        redirect_to researchertDetail_path(id: project.id)
       else
         flash[:error] = "Request Submit Unsuccessful"
         redirect_to Register_path
@@ -25,10 +28,17 @@ class AnnotationsController < ApplicationController
     @member = Project.find_by(title: Annotation.find_by_id(params[:id]).Project_Select).members rescue nil
   end 
 
-	
+  private
 
-	private
-	  def annotation_params
-        params.permit(:Item_Name,:Project_Select,:Item_Price,:Merchant_Name,:Source,:Note)
+  def load_project
+    @project = Project.find_by(id: params[:Project_Select])
+    if @project.blank?
+      flash[:error] = "Invalid Affiliate Id"
+      redirect_to Register_path
     end
+  end
+
+  def annotation_params
+    params.permit(:Item_Name,:Item_Price,:Merchant_Name,:Source,:Note)
+  end
 end

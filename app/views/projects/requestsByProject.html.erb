@@ -19,9 +19,7 @@
                                         <label for="Project_Select">Select Affiliates for Item</label>
                                         <select class="form-control" id="Project_Select" name="Project_Select">
                                           <option value="">Select Affilates</option>
-                                          <% @affilates.each do |affliates|  %>
-                                          <option value="<%= affliates %>"><%= affliates %></option>
-                                          <% end %>
+                                          <%= options_for_select(@affilates.map { |affilate| [affilate[:title], affilate[:id]] }, @selected_affiliate.try(:id)) %>
                                         </select>
                                       <i class="arrow double"></i>    
                                         <span class="field-icon"><i class="icon-file"></i></span>
