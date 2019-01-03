@@ -78,7 +78,9 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
-    devise-bootstrap-views (0.0.6)
+    devise-bootstrap-views (0.0.11)
+    devise-i18n (1.5.1)
+      devise (>= 3.4)
     domain_name (0.5.20180417)
       unf (>= 0.0.5, < 1.0.0)
     erubis (2.7.0)
@@ -251,7 +253,8 @@ DEPENDENCIES
   cloudinary
   coffee-rails (~> 4.1.0)
   devise (= 3.5.2)
-  devise-bootstrap-views (= 0.0.6)
+  devise-bootstrap-views (= 0.0.11)
+  devise-i18n
   haml-rails
   httparty
   jbuilder (= 2.3.2)
